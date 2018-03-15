@@ -25,7 +25,8 @@ app.post("/webhook/", function(req, res){
         let event = messaging_events[i];
         let sender = event.sender.id;
         if (event.message && event.message.text) {
-            let text = event.message.text;
+            // let text = event.message.text;
+            let text ="i am"+123;
             sendText(sender, "Text echo: "+text.substring(0, 100));
         }
     }
