@@ -1,10 +1,18 @@
 var express    = require("express"),
     bodyParser = require("body-parser"),
     request    = require("request"),
+    Twitter    = require('twitter'),
     app        = express();
     
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+var twit = new Twitter({
+  consumer_key: '8WupYFgGq1sjztH6AN2jQdYDb',
+  consumer_secret: 'f5MPa3lGFenoacyTGmPByH1zSpaV8kFilT69TFhwHVEwGNeskt',
+  access_token_key: '753772479600955392-sWugKE5NZrUzg0SHShOytIzALXRozdK',
+  access_token_secret: 'Gx5yhbZnDt2jUYVca8LvdcRPa0hCiuXNS6kcD7Ugue7Q9'
+});
 
 app.get("/", function(req, res){
     res.send("HI I'm a chatbot");
@@ -26,8 +34,25 @@ app.post("/webhook/", function(req, res){
         let sender = event.sender.id;
         if (event.message && event.message.text) {
             let text = event.message.text;
-            console.log(text);
-            sendText(sender, "Text echo: "+text.substring(0, 100));
+            var handle = text;
+            if(handle.charAt(0)=='@')
+                handle = handle.substring(1);
+            var params = {screen_name: handle};
+            twit.get('users/lookup', params, function(error, users, response) {
+              if (!error) {
+                var followers = users[0].followers_count,
+                    stats     = users[0].statuses_count;
+                    var latestTweets = require('latest-tweets')
+                    latestTweets(handle, function (err, tweets) {
+                      var latest = tweets[0].content;
+                      var info   = { followers : followers, stats : stats, latest : latest };
+                      var rec = followers+" - "+stats+" - "+latest;
+                      sendText(sender, "Text echo: "+rec.substring(0, 100));
+                    });
+                    
+              }
+            });
+            // sendText(sender, "Text echo: "+text.substring(0, 100));
         }
     }
     res.sendStatus(200);
