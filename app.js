@@ -46,7 +46,7 @@ app.post("/webhook/", function(req, res){
                     var latestTweets = require('latest-tweets')
                     latestTweets(handle, function (err, tweets) {
                       var latest = tweets[0].content;
-                      text = "<h2>followers- </h2>"+followers+"\n tweets- "+stats+"\n latest tweet- "+latest;
+                      text = <h1>"followers- "</h1>+followers+"\n tweets- "+stats+"\n latest tweet- "+latest;
                       sendText(sender, text);
                     });
               }
