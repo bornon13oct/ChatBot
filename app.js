@@ -43,15 +43,14 @@ app.post("/webhook/", function(req, res){
               if (!error) {
                 var followers = users[0].followers_count,
                     stats     = users[0].statuses_count;
-                    
-                    text = followers+" : ";
-            sendText(sender, "Text echo: "+text.substring(0, 100));
+                    var latestTweets = require('latest-tweets')
+                    latestTweets(handle, function (err, tweets) {
+                      var latest = tweets[0].content;
+                      text = "followers- "+followers+" tweets- "+stats+" latest tweet- "+latest;
+                      sendText(sender, "Text echo: "+text.substring(0, 100));
+                    });
               }
             });
-    
-    
-            // let text = event.message.text;
-            
         }
     }
     res.sendStatus(200);
