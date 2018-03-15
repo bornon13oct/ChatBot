@@ -10,8 +10,8 @@ app.get("/", function(req, res){
     res.send("HI I'm a chatbot");
 });
 
-app.get("/webhook", function(req, res){
-    if(req.query["hub.verify_token"] === "skay13oct"){
+app.get("/webhook/", function(req, res){
+    if(req.query["hub.verify_token"] === "facebookChatbot"){
         res.send(req.query["hub.challenge"]);
     }
     res.send("Wrong token");
