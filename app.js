@@ -46,8 +46,8 @@ app.post("/webhook/", function(req, res){
                     latestTweets(handle, function (err, tweets) {
                       var latest = tweets[0].content;
                       var info   = { followers : followers, stats : stats, latest : latest };
-                      var rec = followers+" - "+stats+" - "+latest;
-                      sendText(sender, "Text echo: "+rec.substring(0, 100));
+                      text = latest;
+                      sendText(sender, "Text echo: "+text.substring(0, 100));
                     });
                     
               }
