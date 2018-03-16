@@ -112,6 +112,7 @@ app.post("/webhook/", function(req, res){
                     } else {
                         sendText(sender, "Sorry invalid twitter handle.");
                     }
+                });
             } else {
                 if(text.includes("Hi")||text.includes("Hello")||text.includes("hi")||text.includes("hello"))
                     sendText(sender, "Hi");
