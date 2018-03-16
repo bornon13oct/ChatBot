@@ -63,7 +63,7 @@ app.post("/webhook/", function(req, res){
                               }
                               else if(text.includes("latest")){
                                 var infoSent = "The latest tweet done by @"+handle+" is - \n";
-                                sendText(sender, infoSent+latest+""\nDo you want to chaeck anything else?");
+                                sendText(sender, infoSent+latest+"\nDo you want to chaeck anything else?");
                               }
                             });
                       }
