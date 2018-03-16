@@ -54,11 +54,8 @@ app.post("/webhook/", function(req, res){
                             latestTweets(handle, function (err, tweets) {
                               var latest = tweets[0].content;
                               if(text.includes("followers")){
-                                sendText(sender, "The number of followers",function(err){
-                                    if(!err)
-                                    sendText(sender, followers+".");
-                                });
-                                
+                                var infoSent = "The number of followers of "+handle+" are - ";
+                                sendText(sender, infoSent+followers+".");
                               }
                               else if(text.includes("tweets")){
                                 sendText(sender, "The number of tweets");
