@@ -1,7 +1,7 @@
 var express    = require("express"),
     bodyParser = require("body-parser"),
     request    = require("request"),
-    Twitter    = require('twitter'),
+    Twitter    = require("twitter"),
     app        = express();
     
 app.use(bodyParser.urlencoded({extended: false}))
