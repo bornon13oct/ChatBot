@@ -56,16 +56,28 @@ app.post("/webhook/", function(req, res){
                                  var latest = tweets[0].content;
                               else 
                                  var latest = "";
+                                 var len = tweets.length;
+                              var notweet = "\nThere are no tweets done by @"+handle;
                               if(text.includes("followers")){
                                   if(text.includes("tweets") && !(text.includes("latest"))){
                                       var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
                                       sendText(sender, infoSent);
                                   } else if(!(text.includes("tweets")) && text.includes("latest")){
-                                      var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
+                                      if(len>0){
+                                        var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      } else {
+                                        var infoSent = "The number of followers of @"+handle+" are "+followers+notweet+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      }
                                   } else if(text.includes("tweets") && text.includes("latest")){
-                                      var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
+                                      if(len>0){
+                                        var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      } else {
+                                        var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+notweet+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);  
+                                      }
                                   } else if(!(text.includes("tweets")) && !(text.includes("latest"))){
                                       var infoSent = "The number of followers of @"+handle+" are ";
                                       sendText(sender, infoSent+followers+"."+"\nDo you want to check anything else?");
@@ -76,11 +88,21 @@ app.post("/webhook/", function(req, res){
                                       var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the number of followers of @"+handle+" are "+followers+"\nDo you want to check anything else?";
                                       sendText(sender, infoSent);
                                   } else if(!(text.includes("followers")) && text.includes("latest")){
-                                      var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
+                                      if(len>0){
+                                        var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      } else {
+                                        var infoSent = "The number of tweets by @"+handle+" are "+stats+notweet+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      }
                                   } else if(text.includes("followers") && text.includes("latest")){
-                                      var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
+                                      if(len>0){
+                                        var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      } else {
+                                        var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the number of followers of @"+handle+" are "+followers+notweet+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      }
                                   } else if(!(text.includes("followers")) && !(text.includes("latest"))){
                                       var infoSent = "The number of tweets done by @"+handle+" are ";
                                       sendText(sender, infoSent+stats+"."+"\nDo you want to check anything else?");
@@ -88,22 +110,42 @@ app.post("/webhook/", function(req, res){
                               }
                               else if(text.includes("latest")){
                                   if(text.includes("followers") && !(text.includes("tweets"))){
-                                      var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of followers of @"+handle+" are "+followers+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
+                                      if(len>0){
+                                        var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of followers of @"+handle+" are "+followers+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      } else {
+                                        var infoSent = "There are no tweets by @"+handle+"\nand the number of followers of @"+handle+" are "+followers+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      }
                                   } else if(!(text.includes("followers")) && text.includes("tweets")){
-                                      var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
+                                      if(len>0){
+                                        var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      } else {
+                                        var infoSent = "There are no tweets by @"+handle+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      }
                                   } else if(text.includes("followers") && text.includes("tweets")){
-                                      var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
+                                      if(len>0){
+                                        var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      } else {
+                                        var infoSent = "There are no tweets by @"+handle+"\nand the number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
+                                        sendText(sender, infoSent);
+                                      }
                                   } else if(!(text.includes("followers")) && !(text.includes("tweets"))){
-                                      var infoSent = "The latest tweet done by @"+handle+" is - \n";
-                                      sendText(sender, infoSent+latest+"\nDo you want to check anything else?");
+                                      if(len>0){
+                                        var infoSent = "The latest tweet done by @"+handle+" is - \n";
+                                        sendText(sender, infoSent+latest+"\nDo you want to check anything else?");
+                                      } else {
+                                        var infoSent = "There are no tweets done by @"+handle;
+                                        sendText(sender, infoSent+latest+"\nDo you want to check anything else?");
+                                      }
                                   }
                               }
                             });
                       } else {
-                          sendText(sender, "Invalid handle");
+                          sendText(sender, "Sorry you've entered an invalid handle");
                       }
                     }); 
             } else {
