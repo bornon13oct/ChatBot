@@ -49,7 +49,7 @@ app.post("/webhook/", function(req, res){
                     
                 var toreq = "https://twitter.com/users/username_available?username="+handle;
                 request(toreq, function(error ,response ,body){
-                if(!error&&response.statusCode == 200){
+                if(!error){
                     var parsed = JSON.parse(body);
                     var invalid  = parsed.valid;
                     if(!invalid){
