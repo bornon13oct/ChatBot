@@ -52,7 +52,10 @@ app.post("/webhook/", function(req, res){
                             stats     = users[0].statuses_count;
                             var latestTweets = require('latest-tweets')
                             latestTweets(handle, function (err, tweets) {
-                              var latest = tweets[0].content;
+                              if(tweets.length>0)
+                                 var latest = tweets[0].content;
+                              else 
+                                 var latest = "";
                               if(text.includes("followers")){
                                   if(text.includes("tweets") && !(text.includes("latest"))){
                                       var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
