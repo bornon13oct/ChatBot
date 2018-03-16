@@ -54,16 +54,16 @@ app.post("/webhook/", function(req, res){
                             latestTweets(handle, function (err, tweets) {
                               var latest = tweets[0].content;
                               if(text.includes("followers")){
-                                var infoSent = "The number of followers of "+handle+" are - ";
+                                var infoSent = "The number of followers of @"+handle+" are - ";
                                 sendText(sender, infoSent+followers+".");
                               }
                               else if(text.includes("tweets")){
-                                sendText(sender, "The number of tweets");
-                                sendText(sender, stats+".");
+                                var infoSent = "The number of tweets done by @"+handle+" are - ";
+                                sendText(sender, infoSent+stats+".");
                               }
                               else if(text.includes("latest")){
-                                sendText(sender, "The latest tweet");
-                                sendText(sender, latest+".");
+                                var infoSent = "The latest tweet done by @"+handle+" is - \n";
+                                sendText(sender, infoSent+latest+".");
                               }
                             });
                       }
