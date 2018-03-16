@@ -1,7 +1,7 @@
 var express    = require("express"),
     bodyParser = require("body-parser"),
     request    = require("request"),
-    Twitter    = require("twitter"),
+    Twitter    = require('twitter'),
     app        = express();
     
 app.use(bodyParser.urlencoded({extended: false}))
@@ -111,6 +111,26 @@ app.post("/webhook/", function(req, res){
                 else 
                     sendText(sender, "I do not understand.\nTry again.");
             }
+            // if(handle.charAt(0)=='@')
+            //     handle = handle.substring(1);
+            // var params = {screen_name: handle};
+            // twit.get('users/lookup', params, function(error, users, response) {
+            //   if (!error) {
+            //     var followers = users[0].followers_count,
+            //         stats     = users[0].statuses_count;
+            //         var latestTweets = require('latest-tweets')
+            //         latestTweets(handle, function (err, tweets) {
+            //           var latest = tweets[0].content;
+            //           text = "followers- "+followers;
+            //           sendText(sender, text);
+            //           text = "tweets- "+stats;
+            //           sendText(sender, text);
+            //           text = "latest tweet- "+latest;
+            //           sendText(sender, text);
+            //         });
+            //   }
+            // });
+            
         }
     }
     res.sendStatus(200);
