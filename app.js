@@ -4,6 +4,7 @@ var express    = require("express"),
     Twitter    = require('twitter'),
     app        = express();
     
+
 app.use(bodyParser.urlencoded({extended: true}));
 // app.use(bodyParser.json());
 
@@ -53,7 +54,7 @@ app.post("/webhook/", function(req, res){
                     
                     
                     
-                    var toreq = "https://twitter.com/users/username_available?username="+handle;
+                    var toreq = "https://twitter.com/users/username_available?username="+check;
                     request(toreq, function(error ,response ,body){
                     if(!error&&response.statusCode == 200){
                         var parsed = JSON.parse(body);
