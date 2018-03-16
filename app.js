@@ -36,25 +36,53 @@ app.post("/webhook/", function(req, res){
             let text = event.message.text;
     
             var handle = text;
-            if(handle.charAt(0)=='@')
-                handle = handle.substring(1);
-            var params = {screen_name: handle};
-            twit.get('users/lookup', params, function(error, users, response) {
-              if (!error) {
-                var followers = users[0].followers_count,
-                    stats     = users[0].statuses_count;
-                    var latestTweets = require('latest-tweets')
-                    latestTweets(handle, function (err, tweets) {
-                      var latest = tweets[0].content;
-                      text = "followers- "+followers;
-                      sendText(sender, text);
-                      text = "tweets- "+stats;
-                      sendText(sender, text);
-                      text = "latest tweet- "+latest;
-                      sendText(sender, text);
-                    });
-              }
-            });
+            var start  = handle.indexOf("@");
+            if (start != -1) {
+                var post   = handle.indexOf(" ", start);
+                var check  = handle.substring(start,post);
+                handle     = check;
+                if(handle.charAt(0)=='@')
+                    handle = handle.substring(1);
+                    var params = {screen_name: handle};
+                    twit.get('users/lookup', params, function(error, users, response) {
+                      if (!error) {
+                        var followers = users[0].followers_count,
+                            stats     = users[0].statuses_count;
+                            var latestTweets = require('latest-tweets')
+                            latestTweets(handle, function (err, tweets) {
+                              var latest = tweets[0].content;
+                              if(text.includes("followers"))
+                                sendText(sender, followers+".");
+                              else if(text.includes("tweets"))
+                                sendText(sender, stats+".");
+                              else if(text.includes("latest"))
+                                sendText(sender, latest+".");
+                            });
+                      }
+                    }); 
+            } else {
+                sendText(sender, "Hi");
+            }
+            // if(handle.charAt(0)=='@')
+            //     handle = handle.substring(1);
+            // var params = {screen_name: handle};
+            // twit.get('users/lookup', params, function(error, users, response) {
+            //   if (!error) {
+            //     var followers = users[0].followers_count,
+            //         stats     = users[0].statuses_count;
+            //         var latestTweets = require('latest-tweets')
+            //         latestTweets(handle, function (err, tweets) {
+            //           var latest = tweets[0].content;
+            //           text = "followers- "+followers;
+            //           sendText(sender, text);
+            //           text = "tweets- "+stats;
+            //           sendText(sender, text);
+            //           text = "latest tweet- "+latest;
+            //           sendText(sender, text);
+            //         });
+            //   }
+            // });
+            
         }
     }
     res.sendStatus(200);
