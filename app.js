@@ -102,6 +102,8 @@ app.post("/webhook/", function(req, res){
                                   }
                               }
                             });
+                      } else {
+                          sendText(sender, "Invalid handle");
                       }
                     }); 
             } else {
