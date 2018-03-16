@@ -36,10 +36,11 @@ app.post("/webhook/", function(req, res){
             let text = event.message.text;
     
             var handle = text;
-            handle = handle+" ";
             var start  = handle.indexOf("@");
             if (start != -1) {
                 var post   = handle.indexOf(" ", start);
+                if(post==-1)
+                    post = handle.indexOf("?",start);
                 var check  = handle.substring(start,post);
                 handle     = check;
                 if(handle.charAt(0)=='@')
