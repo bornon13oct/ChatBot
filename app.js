@@ -4,8 +4,8 @@ var express    = require("express"),
     Twitter    = require('twitter'),
     app        = express();
     
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 var twit = new Twitter({
   consumer_key: '8WupYFgGq1sjztH6AN2jQdYDb',
@@ -45,69 +45,97 @@ app.post("/webhook/", function(req, res){
                 handle     = check;
                 if(handle.charAt(0)=='@')
                     handle = handle.substring(1);
-                    var params = {screen_name: handle};
-                    twit.get('users/lookup', params, function(error, users, response) {
-                      if (!error) {
-                        var followers = users[0].followers_count,
-                            stats     = users[0].statuses_count;
-                            var latestTweets = require('latest-tweets')
-                            latestTweets(handle, function (err, tweets) {
-                              var latest = tweets[0].content;
-                              if(text.includes("followers")){
-                                  if(text.includes("tweets") && !(text.includes("latest"))){
-                                      var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(!(text.includes("tweets")) && text.includes("latest")){
-                                      var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(text.includes("tweets") && text.includes("latest")){
-                                      var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(!(text.includes("tweets")) && !(text.includes("latest"))){
-                                      var infoSent = "The number of followers of @"+handle+" are ";
-                                      sendText(sender, infoSent+followers+"."+"\nDo you want to check anything else?");
-                                  }
-                              }
-                              else if(text.includes("tweets")){
-                                  if(text.includes("followers") && !(text.includes("latest"))){
-                                      var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the number of followers of @"+handle+" are "+followers+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(!(text.includes("followers")) && text.includes("latest")){
-                                      var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(text.includes("followers") && text.includes("latest")){
-                                      var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(!(text.includes("followers")) && !(text.includes("latest"))){
-                                      var infoSent = "The number of tweets done by @"+handle+" are ";
-                                      sendText(sender, infoSent+stats+"."+"\nDo you want to check anything else?");
-                                  }
-                              }
-                              else if(text.includes("latest")){
-                                  if(text.includes("followers") && !(text.includes("tweets"))){
-                                      var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of followers of @"+handle+" are "+followers+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(!(text.includes("followers")) && text.includes("tweets")){
-                                      var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(text.includes("followers") && text.includes("tweets")){
-                                      var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
-                                      sendText(sender, infoSent);
-                                  } else if(!(text.includes("followers")) && !(text.includes("tweets"))){
-                                      var infoSent = "The latest tweet done by @"+handle+" is - \n";
-                                      sendText(sender, infoSent+latest+"\nDo you want to check anything else?");
-                                  }
-                              }
-                            });
-                      }
-                    }); 
-            } else {
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    var toreq = "https://twitter.com/users/username_available?username="+handle;
+                    request(toreq, function(error ,response ,body){
+                    if(!error&&response.statusCode == 200){
+                        var parsed = JSON.parse(body);
+                        var invalid  = parsed.valid;
+                        if(!invalid){
+                    
+                    
+                    
+                    
+                    
+                    
+                                                                                            var params = {screen_name: handle};
+                                                                                            twit.get('users/lookup', params, function(error, users, response) {
+                                                                                              if (!error) {
+                                                                                                var followers = users[0].followers_count,
+                                                                                                    stats     = users[0].statuses_count;
+                                                                                                    var latestTweets = require('latest-tweets');
+                                                                                                    latestTweets(handle, function (err, tweets) {
+                                                                                                      var latest = tweets[0].content;
+                                                                                                      if(text.includes("followers")){
+                                                                                                          if(text.includes("tweets") && !(text.includes("latest"))){
+                                                                                                              var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(!(text.includes("tweets")) && text.includes("latest")){
+                                                                                                              var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(text.includes("tweets") && text.includes("latest")){
+                                                                                                              var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(!(text.includes("tweets")) && !(text.includes("latest"))){
+                                                                                                              var infoSent = "The number of followers of @"+handle+" are ";
+                                                                                                              sendText(sender, infoSent+followers+"."+"\nDo you want to check anything else?");
+                                                                                                          }
+                                                                                                      }
+                                                                                                      else if(text.includes("tweets")){
+                                                                                                          if(text.includes("followers") && !(text.includes("latest"))){
+                                                                                                              var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the number of followers of @"+handle+" are "+followers+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(!(text.includes("followers")) && text.includes("latest")){
+                                                                                                              var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(text.includes("followers") && text.includes("latest")){
+                                                                                                              var infoSent = "The number of tweets by @"+handle+" are "+stats+"\nand the number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(!(text.includes("followers")) && !(text.includes("latest"))){
+                                                                                                              var infoSent = "The number of tweets done by @"+handle+" are ";
+                                                                                                              sendText(sender, infoSent+stats+"."+"\nDo you want to check anything else?");
+                                                                                                          }
+                                                                                                      }
+                                                                                                      else if(text.includes("latest")){
+                                                                                                          if(text.includes("followers") && !(text.includes("tweets"))){
+                                                                                                              var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of followers of @"+handle+" are "+followers+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(!(text.includes("followers")) && text.includes("tweets")){
+                                                                                                              var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(text.includes("followers") && text.includes("tweets")){
+                                                                                                              var infoSent = "The latest tweet by @"+handle+" is -\n"+latest+"\nand the number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
+                                                                                                              sendText(sender, infoSent);
+                                                                                                          } else if(!(text.includes("followers")) && !(text.includes("tweets"))){
+                                                                                                              var infoSent = "The latest tweet done by @"+handle+" is - \n";
+                                                                                                              sendText(sender, infoSent+latest+"\nDo you want to check anything else?");
+                                                                                                          }
+                                                                                                      }
+                                                                                                    });
+                                                                                              }
+                                                                                            }); 
+            }  else {
+                sendText(sender, "Invalid");
+                }
+                    } else {
+                        sendText(sender, "error");
+                    }
+                    });
+            }
+                else {
                 if(text.includes("Hi")||text.includes("Hello")||text.includes("hi")||text.includes("hello"))
                     sendText(sender, "Hi");
                 else if(text.includes("no")||text.includes("No"))
                     sendText(sender, "Thank You For using me.");
                 else if(text.includes("yes")||text.includes("Yes"))
-                    sendText(sender, "Ask me a question")
+                    sendText(sender, "Ask me a question");
                 else 
                     sendText(sender, "I do not understand.\nTry again.");
             }
