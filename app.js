@@ -69,7 +69,7 @@ app.post("/webhook/", function(req, res){
                       }
                     }); 
             } else {
-                if(text.includes("Hi")||text.includes("Hello"))
+                if(text.includes("Hi")||text.includes("Hello")||text.includes("hi")||text.includes("hello"))
                     sendText(sender, "Hi");
                 else if(text.includes("no")||text.includes("No"))
                     sendText(sender, "Thank You For using me.");
