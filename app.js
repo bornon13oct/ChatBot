@@ -76,7 +76,7 @@ app.post("/webhook/", function(req, res){
                 else if(text.includes("yes")||text.includes("Yes"))
                     sendText(sender, "Ask me a question")
                 else 
-                    sendText(sender, "I do not understand.\n Try again.");
+                    sendText(sender, "I do not understand.\nTry again.");
             }
             // if(handle.charAt(0)=='@')
             //     handle = handle.substring(1);
