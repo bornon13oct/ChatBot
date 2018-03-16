@@ -5,7 +5,7 @@ var express    = require("express"),
     app        = express();
     
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 var twit = new Twitter({
