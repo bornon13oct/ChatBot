@@ -73,7 +73,7 @@ app.post("/webhook/", function(req, res){
                     sendText(sender, "Hi");
                 else if(text.includes("no")||text.includes("No"))
                     sendText(sender, "Thank You For using me.");
-                else if(text.includes("Yes"))
+                else if(text.includes("yes")||text.includes("Yes"))
                     sendText(sender, "Ask me a question")
                 else 
                     sendText(sender, "I do not understand.\n Try again.");
