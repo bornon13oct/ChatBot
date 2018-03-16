@@ -145,7 +145,7 @@ app.post("/webhook/", function(req, res){
                               }
                             });
                       } else {
-                          sendText(sender, "Sorry you've entered an invalid handle");
+                          sendText(sender, "Sorry you've entered an invalid handle\nDo you want to check anything else?");
                       }
                     }); 
             } else {
