@@ -55,15 +55,15 @@ app.post("/webhook/", function(req, res){
                               var latest = tweets[0].content;
                               if(text.includes("followers")){
                                 var infoSent = "The number of followers of @"+handle+" are ";
-                                sendText(sender, infoSent+followers+"."+"\nDo you want to chaeck anything else?");
+                                sendText(sender, infoSent+followers+"."+"\nDo you want to check anything else?");
                               }
                               else if(text.includes("tweets")){
                                 var infoSent = "The number of tweets done by @"+handle+" are ";
-                                sendText(sender, infoSent+stats+"."+"\nDo you want to chaeck anything else?");
+                                sendText(sender, infoSent+stats+"."+"\nDo you want to check anything else?");
                               }
                               else if(text.includes("latest")){
                                 var infoSent = "The latest tweet done by @"+handle+" is - \n";
-                                sendText(sender, infoSent+latest+"\nDo you want to chaeck anything else?");
+                                sendText(sender, infoSent+latest+"\nDo you want to check anything else?");
                               }
                             });
                       }
