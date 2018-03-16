@@ -55,13 +55,13 @@ app.post("/webhook/", function(req, res){
                               var latest = tweets[0].content;
                               if(text.includes("followers")){
                                   if(text.includes("tweets") && !(text.includes("latest"))){
-                                      var infoSent = "The number of followers of @"+handle+" are "+followers+" and the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
+                                      var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nDo you want to check anything else?";
                                       sendText(sender, infoSent);
                                   } else if(!(text.includes("tweets")) && text.includes("latest")){
-                                      var infoSent = "The number of followers of @"+handle+" are "+followers+" and the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                      var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
                                       sendText(sender, infoSent);
                                   } else if(text.includes("tweets") && text.includes("latest")){
-                                      var infoSent = "The number of followers of @"+handle+" are "+followers+" and the number of tweets by @"+handle+" are "+stats+" and the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
+                                      var infoSent = "The number of followers of @"+handle+" are "+followers+"\nand the number of tweets by @"+handle+" are "+stats+"\nand the latest tweet by @"+handle+" is -\n"+latest+"\nDo you want to check anything else?";
                                       sendText(sender, infoSent);
                                   } else if(!(text.includes("tweets")) && !(text.includes("latest"))){
                                       var infoSent = "The number of followers of @"+handle+" are ";
