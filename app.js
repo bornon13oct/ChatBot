@@ -110,10 +110,10 @@
                                                            }
                                                        });
                                                    } else {
-                                                       res.send("Invalid twitter handle");
+                                                       sendText(sender,"Invalid twitter handle");
                                                    }
                                                } else {
-                                                   res.send("Error 404 not found");
+                                                   sendText(sender, "Error 404 not found");
                                                }
                                            });
                                        } else {
