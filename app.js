@@ -65,11 +65,17 @@ app.post("/webhook/", function(req, res){
                                 var infoSent = "The latest tweet done by @"+handle+" is - \n";
                                 sendText(sender, infoSent+latest);
                               }
+                              sendText(sender, "Do you want to chaeck anything else?");
                             });
                       }
                     }); 
             } else {
-                sendText(sender, "Hi");
+                if(text.includes("Hi")||text.includes("Hello"))
+                    sendText(sender, "Hi");
+                else if(text.includes("no")||text.includes("No"))
+                    sendText(sender, "Thank You For using me.");
+                else 
+                    sendText(sender, "I do not understand.\n Try again.");
             }
             // if(handle.charAt(0)=='@')
             //     handle = handle.substring(1);
