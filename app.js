@@ -41,6 +41,7 @@ app.post("/webhook/", function(req, res){
                 var post   = handle.indexOf(" ", start);
                 var check  = handle.substring(start,post);
                 handle     = check;
+                sendText(sender, handle);
                 if(handle.charAt(0)=='@')
                     handle = handle.substring(1);
                     var params = {screen_name: handle};
