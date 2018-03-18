@@ -20,7 +20,8 @@ app.get("/", function(req, res) {
     res.send("HI I'm a chatbot");
 });
 
-let token = "EAAKSZBtrZArpUBALJj08ZBvBZCuTjP19Qk2SQECV8kRyBQuSCq33OImXCPLqF0AGCZBGw94TQcm1TARBxUZAuajVAy4wZAYBeMpg3QDnjJWmwKDSZAHATlRvENufuXfIyvzjOZC35glH1AZAjVWAV8Ob8NslxgZB9lvC8ae56M3iJZBVAwL2CnThCm1YBPLgtX9y2n8ZD";
+// let token = "EAAKSZBtrZArpUBALJj08ZBvBZCuTjP19Qk2SQECV8kRyBQuSCq33OImXCPLqF0AGCZBGw94TQcm1TARBxUZAuajVAy4wZAYBeMpg3QDnjJWmwKDSZAHATlRvENufuXfIyvzjOZC35glH1AZAjVWAV8Ob8NslxgZB9lvC8ae56M3iJZBVAwL2CnThCm1YBPLgtX9y2n8ZD";
+let token ="EAAKSZBtrZArpUBAEZAw21Dag5AvsZC2KfB5h4GEpH7vcmGUd1z2Jpl4LprZCv2CItLhaZCUoTYHyk9nLM5cMPR3VCr3j4PuQv6anSiNeBGyakAVqxYnem6TBUYncxHZBvK4IalNnNem2J1oGvpAq2OFn5JZCzJFOZCcvALPzM4TlZCZBJ6Iorpail73Njyv0Pybyy4ZD";
 
 app.get("/webhook/", function(req, res) {
     if (req.query["hub.verify_token"] === "facebookChatbot") {
